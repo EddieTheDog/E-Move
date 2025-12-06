@@ -21,17 +21,11 @@
     <label><input type="checkbox" value="drugs" id="illegal-drugs"> Drugs</label>
     <label><input type="checkbox" value="weapons" id="illegal-weapons"> Weapons</label>
   </fieldset>
-  <label>Priority:</label>
-  <select id="priority">
-    <option value="normal">Normal</option>
-    <option value="high">High</option>
-  </select>
   <button type="button" onclick="createPackage()">Generate Package</button>
 </form>
 
-<h3>Confirm Package Barcode:</h3>
+<h3>Package Barcode:</h3>
 <canvas id="barcode"></canvas>
-<button type="button" onclick="confirmPackage()">Confirm Barcode</button>
 <h3>Customer QR Code:</h3>
 <canvas id="qrcode"></canvas>
 
