@@ -2,49 +2,46 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Front Desk - E-Move</title>
+<title>E-Move Front Desk</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header><h1>Front Desk - E-Move</h1></header>
+<header>
+<h1>Front Desk - E-Move</h1>
+</header>
 <main>
-<form id="package-form">
 <fieldset>
-<legend>Customer Info</legend>
-<label>Name: <input type="text" id="customerName" required></label><br>
-<label>Email: <input type="email" id="customerEmail" required></label><br>
-<label>Phone: <input type="text" id="customerPhone" required></label><br>
-<label>Location: 
-<select id="location">
-  <option value="downstairs">Downstairs</option>
-  <option value="upstairs">Upstairs</option>
-</select>
-</label><br>
-<label>Priority: 
-<select id="priority">
-  <option value="normal">Normal</option>
-  <option value="high">High</option>
-</select>
-</label><br>
-<label>Illegal / Restricted items? 
-<select id="flagged">
-  <option value="no">No</option>
-  <option value="yes">Yes</option>
-</select>
-</label>
+  <legend>Create Package</legend>
+  <label>Customer Name:</label>
+  <input type="text" id="customerName">
+  <label>Email:</label>
+  <input type="text" id="email">
+  <label>Phone:</label>
+  <input type="text" id="phone">
+  <label>Delivery Location (Room):</label>
+  <input type="text" id="location">
+  <label>Upstairs/Downstairs:</label>
+  <select id="floor">
+    <option value="downstairs">Downstairs</option>
+    <option value="upstairs">Upstairs</option>
+  </select>
+  <label>Priority:</label>
+  <select id="priority">
+    <option value="normal">Normal</option>
+    <option value="high">High</option>
+  </select>
+  <fieldset>
+    <legend>Check for restricted items</legend>
+    <input type="checkbox" id="money"> Money
+    <input type="checkbox" id="animals"> Animals
+    <input type="checkbox" id="other"> Other
+  </fieldset>
+  <button onclick="createPackage()">Create Package</button>
 </fieldset>
 
-<fieldset>
-<legend>Package Info</legend>
-<label>Package # (auto-generated): <span id="package-number">---</span></label><br>
-<label>Tracking #: <span id="tracking-number">---</span></label><br>
-<label>Barcode: <span id="barcode">---</span></label><br>
-<label>QR Code URL: <span id="qrcode">---</span></label><br>
-</fieldset>
-
-<button type="button" onclick="createPackage()">Create Package</button>
-</form>
+<div id="package-info"></div>
 
 <script src="js/frontdesk.js"></script>
+</main>
 </body>
 </html>
