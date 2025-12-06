@@ -1,3 +1,6 @@
+// frontdesk.js
+let lastPackage = null;
+
 function createPackage(){
   const name=document.getElementById('customerName').value.trim();
   const email=document.getElementById('customerEmail').value.trim();
@@ -12,6 +15,15 @@ function createPackage(){
   const packageNumber=`E-MOVE-${initials}-${timestamp}`;
   const trackingNumber=`TRACK-${timestamp}`;
 
+  lastPackage = {packageNumber, trackingNumber};
+
+  JsBarcode(document.getElementById('barcode'), packageNumber, {format:"CODE128", displayValue:true, width:2, height:50});
+  QRCode.toCanvas(document.getElementById('qrcode'), `tracking.html?number=${trackingNumber}`, function (error) {
+    if(error) console.error(error);
+    alert('Package created! Please confirm the barcode.');
+  });
+
+  // Save in localStorage but status Pending Confirmation
   let packages=JSON.parse(localStorage.getItem('packages')||'[]');
   packages.push({
     packageNumber,
@@ -25,22 +37,17 @@ function createPackage(){
     shelf:'O1'
   });
   localStorage.setItem('packages',JSON.stringify(packages));
-
-  // Generate Barcode
-  JsBarcode(document.getElementById('barcode'), packageNumber, {format:"CODE128", displayValue:true, width:2, height:50});
-
-  // Generate QR Code linking to tracking page
-  QRCode.toCanvas(document.getElementById('qrcode'), `tracking.html?number=${trackingNumber}`, function (error) {
-    if(error) console.error(error);
-    alert('Package created! Confirm the barcode before proceeding.');
-  });
 }
 
-function deleteAllPackages(){
-  if(confirm('Are you sure? This will delete all packages.')){
-    localStorage.removeItem('packages');
-    alert('All packages deleted.');
-    document.getElementById('barcode').getContext('2d').clearRect(0,0,400,100);
-    document.getElementById('qrcode').getContext('2d').clearRect(0,0,200,200);
-  }
+function confirmPackage(){
+  if(!lastPackage) return alert('No package to confirm');
+  let packages=JSON.parse(localStorage.getItem('packages')||'[]');
+  packages=packages.map(p=>{
+    if(p.packageNumber===lastPackage.packageNumber){
+      p.status='Confirmed';
+    }
+    return p;
+  });
+  localStorage.setItem('packages',JSON.stringify(packages));
+  alert('Package confirmed!');
 }
