@@ -5,3 +5,5 @@ form label { display: block; margin: 5px 0; }
 button { margin-top: 10px; padding: 5px 10px; }
 #recent-scans { margin-top: 30px; }
 #scan-list li { margin-bottom: 3px; }
+input { margin-right: 5px; }
+#package-info { margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; }
