@@ -2,45 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>E-Move Tracking</title>
+<title>Tracking - E-Move</title>
 <link rel="stylesheet" href="assets/css/style.css">
-<style>
-#tracking-container {
-max-width: 500px;
-margin: auto;
-background: #fff;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-text-align: center;
-}
-#status {
-font-weight: bold;
-font-size: 1.5em;
-margin: 10px 0;
-padding: 10px;
-border-radius: 5px;
-color: white;
-}
-.status-pending { background: orange; }
-.status-stored { background: blue; }
-.status-delivery { background: gold; color: black; }
-.status-delivered { background: green; }
-.status-flagged { background: red; }
-</style>
 </head>
 <body>
-<header>
-<h1>E-Move Tracking</h1>
-</header>
+<header><h1>Package Tracking</h1></header>
 <main>
-<div id="tracking-container">
-<p>Tracking #: <span id="tracking-number">---</span></p>
-<p>Status: <span id="status" class="status-pending">---</span></p>
-<p>Estimated delivery: <span id="eta">---</span> minutes</p>
-<p id="message"></p>
+<div id="trackingInfo">
+  <p>Loading...</p>
 </div>
-<script src="js/customer.js"></script>
+<script>
+function getQueryParam(param){
+  const urlParams=new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+function renderTracking(){
+  const packages=JSON.parse(localStorage.getItem('packages')||'[]');
+  const number=getQueryParam('number');
+  const pkg=packages.find(p=>p.trackingNumber===number);
+  const info=document.getElementById('trackingInfo');
+  if(!pkg){ info.innerHTML='<p>Package not found</p>'; return; }
+  info.innerHTML=`<h3>${pkg.packageNumber}</h3>
+  <p>Status: ${pkg.status}</p>
+  <p>Estimated Delivery: ${pkg.status==='Delivery'?'In Transit':'Pending'}</p>`;
+}
+
+renderTracking();
+</script>
 </main>
 </body>
 </html>
