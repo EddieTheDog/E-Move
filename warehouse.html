@@ -13,6 +13,7 @@
 <div style="margin-bottom:10px;">
   <button onclick="showTab('shelves')">Shelf Overview</button>
   <button onclick="showTab('tasks')">Tasks</button>
+  <button onclick="showTab('delivery')">Delivery Bay</button>
 </div>
 
 <!-- Shelf Overview -->
@@ -25,6 +26,12 @@
 <div id="tasksTab" style="display:none;">
   <h2>Warehouse Tasks</h2>
   <div id="task-list"></div>
+</div>
+
+<!-- Delivery Bay -->
+<div id="deliveryTab" style="display:none;">
+  <h2>Delivery Bay</h2>
+  <div id="delivery-list"></div>
 </div>
 
 <script src="js/warehouse.js"></script>
