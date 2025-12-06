@@ -6,30 +6,11 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header><h1>Package Tracking</h1></header>
+<header><h1>Track Your Package</h1></header>
 <main>
-<div id="trackingInfo">
-  <p>Loading...</p>
-</div>
-<script>
-function getQueryParam(param){
-  const urlParams=new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
+<div id="trackingInfo"></div>
 
-function renderTracking(){
-  const packages=JSON.parse(localStorage.getItem('packages')||'[]');
-  const number=getQueryParam('number');
-  const pkg=packages.find(p=>p.trackingNumber===number);
-  const info=document.getElementById('trackingInfo');
-  if(!pkg){ info.innerHTML='<p>Package not found</p>'; return; }
-  info.innerHTML=`<h3>${pkg.packageNumber}</h3>
-  <p>Status: ${pkg.status}</p>
-  <p>Estimated Delivery: ${pkg.status==='Delivery'?'In Transit':'Pending'}</p>`;
-}
-
-renderTracking();
-</script>
+<script src="js/tracking.js"></script>
 </main>
 </body>
 </html>
