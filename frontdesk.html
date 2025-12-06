@@ -27,11 +27,13 @@
     <option value="high">High</option>
   </select>
   <button type="button" onclick="createPackage()">Generate Package</button>
-  <button type="button" onclick="deleteAllPackages()">Delete All Packages</button>
 </form>
 
-<h3>Package Barcode:</h3><canvas id="barcode"></canvas>
-<h3>Customer QR Code:</h3><canvas id="qrcode"></canvas>
+<h3>Confirm Package Barcode:</h3>
+<canvas id="barcode"></canvas>
+<button type="button" onclick="confirmPackage()">Confirm Barcode</button>
+<h3>Customer QR Code:</h3>
+<canvas id="qrcode"></canvas>
 
 <script src="js/frontdesk.js"></script>
 </main>
