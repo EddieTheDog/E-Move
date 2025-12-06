@@ -26,9 +26,6 @@ button {
 button:hover { background-color: #0056b3; transform: translateY(-1px); }
 input, select { margin: 5px 0; padding: 8px; border: 1px solid #cce; border-radius: 4px; box-sizing: border-box; width: 100%; }
 fieldset { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius: 6px; background-color: #ffffff; }
-table { width: 100%; border-collapse: collapse; margin-top: 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); background-color: #ffffff; }
-th, td { border: 1px solid #eee; padding: 10px; text-align: center; }
-th { background-color: #eef; color: #333; font-weight: bold; }
 #shelf-grid { display: flex; gap: 15px; }
 .shelf-card { border: 2px solid #ccc; border-radius: 8px; padding: 10px; width: 220px; background-color: #fff; }
 .package-card { border: 1px solid #aaa; border-radius: 6px; padding: 5px; margin: 5px 0; cursor: pointer; transition: transform 0.1s; }
