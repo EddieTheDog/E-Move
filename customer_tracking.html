@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>E-Move Tracking</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <header>
@@ -15,6 +17,12 @@
     <p>Tracking Number: <span id="tracking-number">---</span></p>
     <p>Status: <span id="status">---</span></p>
     <p>Shelf/Location: <span id="location">---</span></p>
+
+    <h3>Barcode:</h3>
+    <svg id="barcode"></svg>
+
+    <h3>QR Code:</h3>
+    <div id="qrcode"></div>
   </main>
 
   <script src="js/tracking.js"></script>
