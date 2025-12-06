@@ -33,7 +33,7 @@
     <option value="high">High</option>
   </select>
   <fieldset>
-    <legend>Check for restricted items</legend>
+    <legend>Restricted Items Check</legend>
     <input type="checkbox" id="money"> Money
     <input type="checkbox" id="animals"> Animals
     <input type="checkbox" id="other"> Other
@@ -41,20 +41,16 @@
   <button onclick="createPackage()">Create Package</button>
 </fieldset>
 
-<!-- Barcode & QR Code display -->
+<div id="package-info" style="margin-top:10px;"></div>
 <div id="barcode" style="margin-top:15px;"></div>
 <div id="qrcode" style="margin-top:15px;"></div>
 
-<!-- Confirm Barcode -->
 <fieldset style="margin-top:15px;">
-  <legend>Confirm Barcode</legend>
-  <label>Scan or type barcode:</label>
-  <input type="text" id="barcodeInput">
-  <button onclick="confirmBarcode()">Confirm & Next</button>
+  <legend>Confirm Tracking Number</legend>
+  <label>Scan or type tracking number:</label>
+  <input type="text" id="trackingInput">
+  <button onclick="confirmTracking()">Confirm & Store Package</button>
 </fieldset>
-
-<!-- Package info -->
-<div id="package-info"></div>
 
 <script src="js/frontdesk.js"></script>
 </main>
