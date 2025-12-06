@@ -10,12 +10,10 @@ document.getElementById("scan-btn").addEventListener("click", () => {
         document.getElementById("shelf").innerText = pkg.shelf;
         document.getElementById("status").innerText = pkg.status;
 
-        // Show package info
         document.getElementById("package-info").style.display = "block";
 
         // Generate barcode
         JsBarcode("#barcode", pkg.trackingNumber, {format:"CODE128", width:2, height:40});
-
         // Generate QR code
         document.getElementById("qrcode").innerHTML = "";
         new QRCode(document.getElementById("qrcode"), pkg.trackingNumber);
