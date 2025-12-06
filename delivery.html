@@ -2,37 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>E-Move Delivery</title>
+  <title>Delivery - E-Move</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <header>
-    <h1>E-Move Delivery</h1>
+    <h1>Delivery</h1>
+    <button onclick="window.location.href='index.html'">Go Back</button>
   </header>
-
   <main>
     <label>Scan / Enter Tracking Number:</label>
     <input type="text" id="scan-input" placeholder="TRK-EM1234">
     <button id="scan-btn">Scan</button>
 
     <div id="package-info" style="display:none; margin-top:15px;">
-      <p>Package Number: <span id="package-number"></span></p>
-      <p>Tracking Number: <span id="tracking-number"></span></p>
+      <p>Package #: <span id="package-number"></span></p>
+      <p>Tracking #: <span id="tracking-number"></span></p>
       <p>Shelf: <span id="shelf"></span></p>
       <p>Status: <span id="status"></span></p>
-
-      <h3>Barcode:</h3>
-      <svg id="barcode"></svg>
-
-      <h3>QR Code:</h3>
-      <div id="qrcode"></div>
-
-      <button id="go-back">Go Back</button>
     </div>
   </main>
-
   <script src="js/delivery.js"></script>
 </body>
 </html>
