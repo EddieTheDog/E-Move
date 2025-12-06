@@ -1,36 +1,28 @@
-let packages = JSON.parse(localStorage.getItem('packages') || '[]');
-let currentPackage=null;
+function renderDelivery(){
+  const packages=JSON.parse(localStorage.getItem('packages')||'[]');
+  const deliveryList=document.getElementById('deliveryList');
+  deliveryList.innerHTML='';
 
-function scanPackage(){
-const code=document.getElementById('scan-input').value.trim();
-const pkg=packages.find(p=>p.barcode===code||p.packageNumber===code);
-if(pkg && pkg.status==='Stored'){
-currentPackage=pkg;
-pkg.status='With Delivery Driver';
-localStorage.setItem('packages',JSON.stringify(packages));
-showActivePackage();
-}else alert('Package not found or already in delivery.');
-}
+  const readyPackages=packages.filter(p=>p.status==='With Delivery Driver');
 
-function showActivePackage(){
-if(currentPackage){
-const container=document.getElementById('active-package');
-container.innerHTML=`<p>Package #: ${currentPackage.packageNumber}</p>
-<p>Tracking #: ${currentPackage.trackingNumber}</p>
-<p>Deliver to: ${currentPackage.location}</p>
-<p>Priority: ${currentPackage.priority}</p>`;
-document.getElementById('delivery-buttons').style.display='block';
-}
+  readyPackages.forEach(p=>{
+    const card=document.createElement('div');
+    card.className='task-card';
+    card.innerHTML=`<span>${p.packageNumber} - ${p.room}</span>
+    <button onclick="deliverPackage('${p.packageNumber}')">Deliver</button>`;
+    deliveryList.appendChild(card);
+  });
 }
 
-function pickedUp(){alert('Package picked up confirmed.');}
-function delivered(){alert('Package delivered confirmed.');}
-function finishDelivery(){
-currentPackage.status='Delivered';
-packages=packages.map(p=>p.packageNumber===currentPackage.packageNumber?currentPackage:p);
-localStorage.setItem('packages',JSON.stringify(packages));
-alert('Delivery confirmed. Package is now Delivered.');
-currentPackage=null;
-document.getElementById('active-package').innerHTML='';
-document.getElementById('delivery-buttons').style.display='none';
+function deliverPackage(pkgNum){
+  let packages=JSON.parse(localStorage.getItem('packages')||'[]');
+  const pkg=packages.find(p=>p.packageNumber===pkgNum);
+  if(!pkg || pkg.status!=='With Delivery Driver') return alert('Package not ready!');
+  pkg.status='Delivered';
+  localStorage.setItem('packages',JSON.stringify(packages));
+  renderDelivery();
+  alert(`Package ${pkgNum} marked as Delivered!`);
 }
+
+setInterval(renderDelivery,3000);
+renderDelivery();
