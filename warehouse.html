@@ -6,42 +6,19 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header><h1>Warehouse Dashboard</h1></header>
-
+<header><h1>Warehouse Overview</h1></header>
 <main>
 <div id="legend">
-  <span class="legend-item legend-priority">Priority (Red)</span>
-  <span class="legend-item legend-flagged">Flagged (Border)</span>
   <span class="legend-item legend-normal">Normal</span>
+  <span class="legend-item legend-priority">Priority</span>
+  <span class="legend-item legend-flagged">Flagged</span>
 </div>
 
-<div style="margin-bottom:10px;">
-  <button onclick="showTab('shelves')">Shelf Overview</button>
-  <button onclick="showTab('tasks')">Tasks</button>
-</div>
+<h2>Current Tasks</h2>
+<div id="taskList"></div>
 
-<div id="shelvesTab">
-  <h2>Shelves</h2>
-  <div id="shelf-grid"></div>
-</div>
-
-<div id="tasksTab" style="display:none;">
-  <h2>Warehouse Tasks</h2>
-  <div id="task-list"></div>
-</div>
-
-<div id="taskModal" class="modal">
-  <div class="modal-content">
-    <h3 id="modal-title"></h3>
-    <p id="modal-description"></p>
-    <input type="text" id="modal-scan" placeholder="Scan barcode">
-    <label><input type="checkbox" id="reviewCheckbox"> Reviewed with me</label>
-    <label><input type="checkbox" id="damageCheckbox"> Damaged?</label>
-    <label><input type="checkbox" id="atBayCheckbox"> Arrived at Delivery Bay</label>
-    <button onclick="completeModalTask()">Confirm</button>
-    <button onclick="closeModal()">Cancel</button>
-  </div>
-</div>
+<h2>Shelf Overview</h2>
+<div id="shelf-grid"></div>
 
 <script src="js/warehouse.js"></script>
 </main>
