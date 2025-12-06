@@ -11,7 +11,6 @@ function createPackage(){
   const priority = document.getElementById('priority').value;
   const flagged = (document.getElementById('money').checked || document.getElementById('animals').checked || document.getElementById('other').checked);
 
-  // Do not assign shelf yet; assign after confirmation
   const pkg = {
     packageNumber,
     trackingNumber,
@@ -31,22 +30,18 @@ function createPackage(){
   packages.push(pkg);
   localStorage.setItem('packages', JSON.stringify(packages));
 
-  // Display barcode and QR code
+  // Show barcode and QR code
   showCodes(pkg);
 
-  // Show confirmation button
-  document.getElementById('confirm-btn').style.display='inline-block';
-
-  // Show info
-  document.getElementById('package-info').innerHTML=`
-    <p>Package Created!</p>
+  // Show package info
+  document.getElementById('package-info').innerHTML = `
     <p>Package #: ${packageNumber}</p>
     <p>Tracking #: ${trackingNumber}</p>
     ${flagged?'<strong>Flagged for review!</strong>':''}
+    <p>Please scan the barcode to confirm before storing.</p>
   `;
 }
 
-// Generate barcode and QR code
 function showCodes(pkg){
   // Barcode
   const svg = document.createElement('svg');
@@ -62,10 +57,20 @@ function showCodes(pkg){
   });
 }
 
-// Confirm & assign shelf
-function confirmPackage(){
+function confirmBarcode(){
+  let input = document.getElementById('barcodeInput').value.trim();
   let packages = JSON.parse(localStorage.getItem('packages') || '[]');
-  const pkg = packages.find(p => p.status === 'Pending Confirmation');
+  let pkg = packages.find(p => p.status==='Pending Confirmation');
+
+  if(!pkg){
+    alert('No package to confirm.');
+    return;
+  }
+
+  if(input !== pkg.packageNumber){
+    alert('Barcode does not match. Please scan the correct barcode.');
+    return;
+  }
 
   // Assign shelf automatically
   const shelfList=['O1','O2','O3','O4','O5'];
@@ -76,18 +81,9 @@ function confirmPackage(){
 
   localStorage.setItem('packages', JSON.stringify(packages));
   alert(`Package confirmed and stored in shelf ${pkg.shelf}.`);
-  
-  // Hide confirm button
-  document.getElementById('confirm-btn').style.display='none';
 
-  // Clear inputs
-  document.getElementById('customerName').value='';
-  document.getElementById('email').value='';
-  document.getElementById('phone').value='';
-  document.getElementById('location').value='';
-  document.getElementById('money').checked=false;
-  document.getElementById('animals').checked=false;
-  document.getElementById('other').checked=false;
+  // Clear inputs and display
+  document.getElementById('barcodeInput').value='';
   document.getElementById('barcode').innerHTML='';
   document.getElementById('qrcode').innerHTML='';
   document.getElementById('package-info').innerHTML='';
