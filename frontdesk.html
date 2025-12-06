@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Front Desk - E-Move</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Front Desk</h1>
+    <button onclick="window.location.href='index.html'">Go Back</button>
+  </header>
+
+  <main>
+    <section id="form-section">
+      <h2>Package Intake Form</h2>
+      <form id="intake-form">
+        <fieldset>
+          <legend>Customer Info</legend>
+          <label>Name: <input type="text" name="customerName" required></label><br>
+          <label>Contact (phone/email): <input type="text" name="contact" required></label><br>
+          <label>Recipient: <input type="text" name="recipient"></label><br>
+          <label>Room: <input type="text" name="room"></label><br>
+        </fieldset>
+
+        <fieldset>
+          <legend>Package Info</legend>
+          <label>Priority:
+            <select name="priority">
+              <option value="normal">Normal</option>
+              <option value="high">High</option>
+            </select>
+          </label><br>
+          <label>Delivery Location:
+            <select name="location">
+              <option value="downstairs">Downstairs</option>
+              <option value="upstairs">Upstairs</option>
+            </select>
+          </label><br>
+          <label>Restricted Items:<br>
+            <input type="checkbox" name="money"> Money
+            <input type="checkbox" name="animals"> Animals
+          </label>
+        </fieldset>
+
+        <button type="submit">Generate Package</button>
+      </form>
+    </section>
+
+    <section id="package-info" style="display:none; margin-top:15px;">
+      <h2>Package Generated</h2>
+      <p>Package Number: <span id="package-number"></span></p>
+      <p>Tracking Number: <span id="tracking-number"></span></p>
+      <p>Assigned Shelf: <span id="shelf"></span></p>
+      <p id="delivery-msg"></p>
+
+      <h3>Barcode (for printing):</h3>
+      <svg id="barcode"></svg>
+
+      <h3>QR Code (customer tracking):</h3>
+      <div id="qrcode"></div>
+
+      <label>Confirm Tracking Number (scan or type):</label>
+      <input type="text" id="confirm-tracking" placeholder="TRK-EM1234">
+      <button id="confirm-btn">Done</button>
+    </section>
+  </main>
+
+  <script src="js/frontdesk.js"></script>
+</body>
+</html>
