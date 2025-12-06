@@ -6,72 +6,76 @@ body {
 header {
     text-align: center;
     margin-bottom: 20px;
-    padding: 15px; /* Added padding */
-    background-color: #ffffff; /* White background for the header */
-    border-radius: 8px; /* Slightly rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 15px; 
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 h1 {
-    color: #0056b3; /* Slightly darker primary color */
-    font-size: 2em; /* Ensure good heading size */
+    color: #0056b3; 
+    font-size: 2em; 
 }
 button {
-    padding: 8px 15px; /* Increased padding */
+    padding: 8px 15px; 
     margin: 5px;
-    background-color: #0077cc; /* Primary button color */
+    background-color: #0077cc; 
     color: white;
     border: none;
-    border-radius: 5px; /* Rounded corners for buttons */
+    border-radius: 5px; 
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s; /* Smooth transitions for interaction */
+    transition: background-color 0.2s, transform 0.1s; 
     font-weight: bold;
 }
 button:hover {
-    background-color: #0056b3; /* Darker on hover */
-    transform: translateY(-1px); /* Slight lift effect on hover */
+    background-color: #0056b3; 
+    transform: translateY(-1px); 
 }
 input, select {
     margin: 5px 0;
-    padding: 8px; /* Added padding to inputs/selects */
+    padding: 8px; 
     border: 1px solid #cce;
     border-radius: 4px;
-    box-sizing: border-box; /* Crucial for padding/border not to increase width */
+    box-sizing: border-box; 
 }
 fieldset {
-    margin: 15px 0; /* Increased margin */
-    padding: 15px; /* Increased padding */
+    margin: 15px 0; 
+    padding: 15px; 
     border: 1px solid #ddd;
-    border-radius: 6px; /* Rounded corners for fieldset */
-    background-color: #ffffff; /* White background */
+    border-radius: 6px; 
+    background-color: #ffffff; 
 }
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for the table */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
     background-color: #ffffff;
 }
 th, td {
-    border: 1px solid #eee; /* Lighter border for a cleaner look */
-    padding: 10px; /* Increased padding */
+    border: 1px solid #eee; 
+    padding: 10px; 
     text-align: center;
 }
 th {
-    background-color: #eef; /* Light background for headers */
+    background-color: #eef; 
     color: #333;
     font-weight: bold;
 }
 #shelf-grid div {
     margin: 5px 0;
-    padding: 10px; /* Added padding */
-    border: 1px dashed #ccc; /* Subtle border for visual separation */
+    padding: 10px; 
+    border: 1px dashed #ccc; 
     border-radius: 4px;
 }
 #package-info {
-    border-top: 2px solid #0077cc; /* Thicker, colored border-top */
-    padding-top: 15px; /* Increased padding */
+    border-top: 2px solid #0077cc; 
+    padding-top: 15px; 
     margin-top: 15px;
     background-color: #fff;
-    padding: 15px; /* Added general padding */
-    border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+    border-radius: 0 0 8px 8px; 
 }
+.status-pending { background: orange; color:white; padding:5px; border-radius:5px; }
+.status-stored { background: blue; color:white; padding:5px; border-radius:5px; }
+.status-delivery { background: gold; color:black; padding:5px; border-radius:5px; }
+.status-delivered { background: green; color:white; padding:5px; border-radius:5px; }
+.status-flagged { background: red; color:white; padding:5px; border-radius:5px; }
