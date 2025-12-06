@@ -41,10 +41,20 @@
   <button onclick="createPackage()">Create Package</button>
 </fieldset>
 
+<!-- Barcode & QR Code display -->
+<div id="barcode" style="margin-top:15px;"></div>
+<div id="qrcode" style="margin-top:15px;"></div>
+
+<!-- Confirm Barcode -->
+<fieldset style="margin-top:15px;">
+  <legend>Confirm Barcode</legend>
+  <label>Scan or type barcode:</label>
+  <input type="text" id="barcodeInput">
+  <button onclick="confirmBarcode()">Confirm & Next</button>
+</fieldset>
+
+<!-- Package info -->
 <div id="package-info"></div>
-<div id="barcode"></div>
-<div id="qrcode"></div>
-<button id="confirm-btn" style="display:none;" onclick="confirmPackage()">Confirm & Next</button>
 
 <script src="js/frontdesk.js"></script>
 </main>
