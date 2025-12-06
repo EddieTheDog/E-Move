@@ -5,21 +5,20 @@
   <title>E-Move Dashboard</title>
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- Barcode JS -->
+  <!-- Barcode & QR code JS -->
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <!-- QR Code JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <header>
     <h1>E-Move Dashboard</h1>
-    <p id="role-display">Role: </p>
+    <p id="role-display"></p>
   </header>
 
   <main>
-    <!-- Package Intake Form -->
-    <section id="package-intake">
-      <h2>Package Intake</h2>
+    <!-- Front Desk Section -->
+    <section id="frontdesk-section" style="display:none;">
+      <h2>Front Desk - Package Intake</h2>
       <form id="intake-form">
         <label>Customer Name: <input type="text" name="customerName" required></label><br>
         <label>Contact (phone/email): <input type="text" name="contact" required></label><br>
@@ -38,24 +37,33 @@
         <button type="submit">Generate Package</button>
       </form>
 
-      <!-- Display Generated Info -->
-      <div id="package-info" style="display:none;">
+      <div id="package-info" style="display:none; margin-top:15px;">
         <p>Package Number: <span id="package-number"></span></p>
         <p>Tracking Number: <span id="tracking-number"></span></p>
         <p>Assigned Shelf: <span id="shelf"></span></p>
 
-        <h3>Barcode:</h3>
+        <h3>Barcode (printable):</h3>
         <svg id="barcode"></svg>
 
-        <h3>QR Code:</h3>
+        <h3>QR Code (customer tracking):</h3>
         <div id="qrcode"></div>
+
+        <label>Confirm Tracking Number (scan or type):</label>
+        <input type="text" id="confirm-tracking" placeholder="TRK-EM1234">
+        <button id="confirm-btn">Done</button>
       </div>
     </section>
 
-    <!-- Recent Scans -->
-    <section id="recent-scans">
-      <h2>Recent Packages</h2>
-      <ul id="scan-list"></ul>
+    <!-- Warehouse Section -->
+    <section id="warehouse-section" style="display:none;">
+      <h2>Warehouse - Stored Packages</h2>
+      <ul id="warehouse-list"></ul>
+    </section>
+
+    <!-- Admin Section -->
+    <section id="admin-section" style="display:none;">
+      <h2>Admin Overview</h2>
+      <ul id="admin-list"></ul>
     </section>
   </main>
 
