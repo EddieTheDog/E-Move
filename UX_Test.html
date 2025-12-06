@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>E-Move - Front Desk / Warehouse</title>
+  <title>E-Move Dashboard</title>
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Barcode JS -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+  <!-- QR Code JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <header>
@@ -34,10 +39,16 @@
       </form>
 
       <!-- Display Generated Info -->
-      <div id="package-info">
-        <p>Package Number: <span id="package-number">---</span></p>
-        <p>Tracking Number: <span id="tracking-number">---</span></p>
-        <p>Assigned Shelf: <span id="shelf">---</span></p>
+      <div id="package-info" style="display:none;">
+        <p>Package Number: <span id="package-number"></span></p>
+        <p>Tracking Number: <span id="tracking-number"></span></p>
+        <p>Assigned Shelf: <span id="shelf"></span></p>
+
+        <h3>Barcode:</h3>
+        <svg id="barcode"></svg>
+
+        <h3>QR Code:</h3>
+        <div id="qrcode"></div>
       </div>
     </section>
 
