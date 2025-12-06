@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Delivery - E-Move</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<title>E-Move Delivery</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Delivery</h1>
-    <button onclick="window.location.href='index.html'">Go Back</button>
-  </header>
-  <main>
-    <label>Scan / Enter Tracking Number:</label>
-    <input type="text" id="scan-input" placeholder="TRK-EM1234">
-    <button id="scan-btn">Scan</button>
+<header>
+<h1>Delivery Bay</h1>
+</header>
+<main>
+<label>Scan package:</label>
+<input type="text" id="scan-input" placeholder="Scan or enter barcode">
+<button onclick="scanPackage()">Scan</button>
 
-    <div id="package-info" style="display:none; margin-top:15px;">
-      <p>Package #: <span id="package-number"></span></p>
-      <p>Tracking #: <span id="tracking-number"></span></p>
-      <p>Shelf: <span id="shelf"></span></p>
-      <p>Status: <span id="status"></span></p>
-    </div>
-  </main>
-  <script src="js/delivery.js"></script>
+<div id="active-package" style="margin-top:20px;"></div>
+
+<div id="delivery-buttons" style="display:none; margin-top:15px;">
+<button onclick="pickedUp()">1. Package Picked Up</button>
+<button onclick="delivered()">2. Package Delivered</button>
+<button onclick="finishDelivery()">3. Confirm & Finish</button>
+</div>
+
+<script src="js/delivery.js"></script>
+</main>
 </body>
 </html>
