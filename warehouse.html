@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Warehouse - E-Move</title>
+<title>E-Move Warehouse</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header><h1>Warehouse - E-Move</h1></header>
+<header>
+<h1>Warehouse - E-Move</h1>
+</header>
 <main>
 <h2>Current Tasks</h2>
-<table id="warehouse-list">
-<thead><tr>
-<th>Package #</th><th>Tracking #</th><th>Customer</th><th>Shelf</th><th>Status</th><th>Priority</th><th>Location</th>
-</tr></thead>
-<tbody></tbody>
+<table>
+<thead>
+<tr><th>Package #</th><th>Tracking #</th><th>Customer</th><th>Shelf</th><th>Status</th><th>Priority</th><th>Location</th></tr>
+</thead>
+<tbody id="warehouse-list"></tbody>
 </table>
 
 <h2>Shelf Overview</h2>
@@ -22,7 +24,7 @@
 <h2>Delivery Bay</h2>
 <div id="delivery-bay"></div>
 
-<button onclick="removeAll()">Remove All Packages</button>
+<button onclick="deleteAllData()">Remove All Packages</button>
 
 <script src="js/warehouse.js"></script>
 </main>
