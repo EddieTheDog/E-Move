@@ -1,28 +1,33 @@
-function renderDelivery(){
+function loadDelivery(){
   const packages=JSON.parse(localStorage.getItem('packages')||'[]');
-  const deliveryList=document.getElementById('deliveryList');
-  deliveryList.innerHTML='';
-
-  const readyPackages=packages.filter(p=>p.status==='With Delivery Driver');
-
-  readyPackages.forEach(p=>{
-    const card=document.createElement('div');
-    card.className='task-card';
-    card.innerHTML=`<span>${p.packageNumber} - ${p.room}</span>
-    <button onclick="deliverPackage('${p.packageNumber}')">Deliver</button>`;
-    deliveryList.appendChild(card);
+  const deliveryDiv=document.getElementById('delivery-list');
+  deliveryDiv.innerHTML='';
+  packages.filter(p=>p.shelf==='Delivery Bay').forEach(p=>{
+    const pkg=document.createElement('div');
+    pkg.className='package-card';
+    pkg.textContent=p.packageNumber+' ('+p.status+')';
+    const btnScan=document.createElement('button');
+    btnScan.textContent='Scan & Start Delivery';
+    btnScan.onclick=()=>startDelivery(p.packageNumber);
+    deliveryDiv.appendChild(pkg);
+    deliveryDiv.appendChild(btnScan);
   });
 }
 
-function deliverPackage(pkgNum){
+function startDelivery(packageNumber){
   let packages=JSON.parse(localStorage.getItem('packages')||'[]');
-  const pkg=packages.find(p=>p.packageNumber===pkgNum);
-  if(!pkg || pkg.status!=='With Delivery Driver') return alert('Package not ready!');
-  pkg.status='Delivered';
-  localStorage.setItem('packages',JSON.stringify(packages));
-  renderDelivery();
-  alert(`Package ${pkgNum} marked as Delivered!`);
+  const pkg=packages.find(p=>p.packageNumber===packageNumber);
+  if(!pkg) return alert('Package not found');
+  if(pkg.shelf!=='Delivery Bay') return alert('Package not in Delivery Bay');
+
+  if(confirm('Confirm you have scanned the package?')){
+    pkg.status='With Delivery Driver';
+    localStorage.setItem('packages',JSON.stringify(packages));
+    alert(`Deliver to Room: ${pkg.room}`);
+    loadDelivery();
+  }
 }
 
-setInterval(renderDelivery,3000);
-renderDelivery();
+// auto-refresh
+loadDelivery();
+setInterval(loadDelivery,2000);
