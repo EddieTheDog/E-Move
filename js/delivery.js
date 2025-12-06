@@ -1,10 +1,14 @@
-const packages = JSON.parse(localStorage.getItem("packages") || "[]");
+let packages = JSON.parse(localStorage.getItem("packages") || "[]");
 
-document.getElementById("scan-btn").addEventListener("click", () => {
-    const trackingInput = document.getElementById("scan-input").value.trim();
-    const pkg = packages.find(p => p.trackingNumber === trackingInput);
+document.getElementById("scan-btn").addEventListener("click", ()=>{
+    const input = document.getElementById("scan-input").value.trim();
+    const pkg = packages.find(p=>p.trackingNumber===input);
 
     if(pkg){
+        // Update status to With Delivery Driver
+        pkg.status = 'With Delivery Driver';
+        localStorage.setItem('packages', JSON.stringify(packages));
+
         document.getElementById("package-number").innerText = pkg.packageNumber;
         document.getElementById("tracking-number").innerText = pkg.trackingNumber;
         document.getElementById("shelf").innerText = pkg.shelf;
@@ -12,17 +16,14 @@ document.getElementById("scan-btn").addEventListener("click", () => {
 
         document.getElementById("package-info").style.display = "block";
 
-        // Generate barcode
         JsBarcode("#barcode", pkg.trackingNumber, {format:"CODE128", width:2, height:40});
-        // Generate QR code
-        document.getElementById("qrcode").innerHTML = "";
+        document.getElementById("qrcode").innerHTML="";
         new QRCode(document.getElementById("qrcode"), pkg.trackingNumber);
-    } else {
+    }else{
         alert("Package not found!");
     }
 });
 
-// Go Back button
-document.getElementById("go-back").addEventListener("click", () => {
+document.getElementById("go-back").addEventListener("click", ()=>{
     window.location.href = "UX_Test.html?role=delivery";
 });
