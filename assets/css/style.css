@@ -30,13 +30,3 @@ fieldset { margin: 15px 0; padding: 15px; border: 1px solid #ddd; border-radius:
 .shelf-card { border: 2px solid #ccc; border-radius: 8px; padding: 10px; width: 220px; background-color: #fff; }
 .package-card { border: 1px solid #aaa; border-radius: 6px; padding: 5px; margin: 5px 0; cursor: pointer; transition: transform 0.1s; }
 .package-card:hover { transform: translateY(-2px); }
-.package-priority { background-color: #ffcccc; }
-.package-flagged { border: 2px solid red; }
-.task-card { border: 2px solid #0077cc; border-radius: 8px; padding: 10px; margin: 10px 0; cursor: pointer; background-color: #eef; display: flex; justify-content: space-between; align-items: center; }
-.task-card.priority { border-color: red; background-color: #ffdada; }
-.notification { width: 12px; height: 12px; background: red; border-radius: 50%; display: inline-block; margin-left: 5px; }
-#legend { margin-top: 15px; }
-.legend-item { display: inline-block; padding: 5px 10px; border-radius: 4px; margin-right: 10px; font-weight: bold; }
-.legend-priority { background-color: #ffcccc; }
-.legend-flagged { border: 2px solid red; padding: 5px 8px; }
-.legend-normal { background-color: #fff; border:1px solid #ccc; }
