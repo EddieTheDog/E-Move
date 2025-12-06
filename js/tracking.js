@@ -1,19 +1,22 @@
-const urlParams = new URLSearchParams(window.location.search);
-const trackingNumberParam = urlParams.get('tracking') || '';
+function renderTracking(){
+  const urlParams=new URLSearchParams(window.location.search);
+  const trackingNum=urlParams.get('number');
+  const packages=JSON.parse(localStorage.getItem('packages')||'[]');
+  const pkg=packages.find(p=>p.trackingNumber===trackingNum);
+  const infoDiv=document.getElementById('trackingInfo');
+  if(!pkg){
+    infoDiv.innerHTML='<p>Package not found.</p>';
+    return;
+  }
 
-document.getElementById('tracking-number').innerText = trackingNumberParam;
-
-const packages = JSON.parse(localStorage.getItem('packages') || '[]');
-const pkg = packages.find(p=>p.trackingNumber===trackingNumberParam);
-
-if(pkg){
-    document.getElementById('status').innerText = pkg.status;
-    document.getElementById('shelf').innerText = pkg.shelf;
-
-    JsBarcode("#barcode", pkg.trackingNumber, {format:"CODE128", width:2, height:40});
-    document.getElementById("qrcode").innerHTML="";
-    new QRCode(document.getElementById("qrcode"), pkg.trackingNumber);
-}else{
-    document.getElementById('status').innerText = 'Not found';
-    document.getElementById('shelf').innerText = '---';
+  infoDiv.innerHTML=`
+    <p><strong>Package Number:</strong> ${pkg.packageNumber}</p>
+    <p><strong>Status:</strong> ${pkg.status}</p>
+    <p><strong>Room:</strong> ${pkg.room}</p>
+    <p><strong>Priority:</strong> ${pkg.priority}</p>
+    <p><strong>Estimated Delivery:</strong> ${pkg.priority==='high'?'5 min':'15 min'}</p>
+  `;
 }
+
+setInterval(renderTracking,3000);
+renderTracking();
