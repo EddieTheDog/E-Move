@@ -1,66 +1,88 @@
-let packages=JSON.parse(localStorage.getItem('packages')||'[]');
-
-function savePackages(){localStorage.setItem('packages',JSON.stringify(packages));}
-
-function updateWarehouse(){
-const tbody=document.getElementById('warehouse-list');
-tbody.innerHTML='';
-
-packages.forEach(p=>{
-let tr=document.createElement('tr');
-tr.innerHTML=`<td>${p.packageNumber}</td><td>${p.trackingNumber}</td>
-<td>${p.customerName}</td><td>${p.shelf}</td><td>${p.status}</td><td>${p.priority}</td><td>${p.location}</td>`;
-tbody.appendChild(tr);
-});
-
-const shelfGrid=document.getElementById('shelf-grid');
-shelfGrid.innerHTML='';
-['O1','O2','O3','O4','O5'].forEach(s=>{
-let div=document.createElement('div');
-div.innerHTML=`<strong>${s}</strong><br>`;
-let items=packages.filter(p=>p.shelf===s);
-items.forEach(item=>{
-let span=document.createElement('span');
-span.innerText=`${item.packageNumber} (${item.status}) `;
-span.style.color=item.status==='Pending Confirmation'||item.status==='Stored'?'red':item.status==='With Delivery Driver'?'orange':'green';
-span.style.marginRight='10px';
-div.appendChild(span);
-});
-if(items.length===0) div.innerHTML+='<em>Empty</em>';
-div.style.border='1px solid #ccc';
-div.style.padding='10px';
-div.style.marginBottom='10px';
-div.style.borderRadius='4px';
-shelfGrid.appendChild(div);
-});
-
-// Delivery bay
-const deliveryBay=document.getElementById('delivery-bay');
-deliveryBay.innerHTML='<h3>Packages Ready for Delivery</h3>';
-packages.filter(p=>p.status==='Stored').forEach(p=>{
-let pEl=document.createElement('div');
-pEl.innerText=`${p.packageNumber} → ${p.location} [${p.priority}]`;
-pEl.style.padding='5px';
-pEl.style.border='1px solid #0077cc';
-pEl.style.borderRadius='4px';
-pEl.style.marginBottom='5px';
-deliveryBay.appendChild(pEl);
-});
-
-// Random audit task every 10s
-if(Math.random()<0.1 && packages.length>0){
-let auditPkg=packages[Math.floor(Math.random()*packages.length)];
-auditPkg.status='Pending Confirmation';
-savePackages();
-}
+// Tab control
+function showTab(tab){
+  document.getElementById('shelvesTab').style.display = tab==='shelves'?'block':'none';
+  document.getElementById('tasksTab').style.display = tab==='tasks'?'block':'none';
 }
 
-setInterval(updateWarehouse,2000);
+// Render shelf overview
+function renderShelves(){
+  const packages = JSON.parse(localStorage.getItem('packages')||'[]');
+  const shelfGrid = document.getElementById('shelf-grid');
+  shelfGrid.innerHTML='';
+  const shelves = ['O1','O2','O3','O4','O5'];
+  
+  shelves.forEach(s=>{
+    const shelfDiv = document.createElement('div');
+    shelfDiv.innerHTML = `<h3>${s}</h3>`;
+    const items = packages.filter(p=>p.shelf===s);
+    if(items.length===0){ shelfDiv.innerHTML += "<p>Empty</p>"; }
+    items.forEach(p=>{
+      shelfDiv.innerHTML += `<div style="padding:5px; border:1px solid #ccc; margin:3px; ${p.priority==='high'?'background-color:#ffcccc;':''}${p.flagged?'border:2px solid red;':''}">
+        ${p.packageNumber} - ${p.status} ${p.flagged?'⚠':''} 
+      </div>`;
+    });
+    shelfGrid.appendChild(shelfDiv);
+  });
+}
 
-function deleteAllData(){
-if(confirm('Are you sure? This will delete all packages.')){
-packages=[];
-savePackages();
-updateWarehouse();
+// Generate tasks
+function renderTasks(){
+  const packages = JSON.parse(localStorage.getItem('packages')||'[]');
+  const taskList = document.getElementById('task-list');
+  taskList.innerHTML='';
+  
+  // Add pending confirmation tasks
+  packages.filter(p=>p.status==='Pending Confirmation').forEach(p=>{
+    taskList.innerHTML += `<div style="border:1px solid #ccc; padding:5px; margin:3px;">
+      Confirm tracking number for ${p.packageNumber} 
+      <input type="text" placeholder="Scan tracking number" id="scan-${p.packageNumber}">
+      <button onclick="completeTask('${p.packageNumber}')">Confirm</button>
+    </div>`;
+  });
+
+  // Add relocation/check tasks randomly (simulate)
+  packages.filter(p=>p.status==='Stored').forEach(p=>{
+    // Randomly some items need check
+    if(Math.random()<0.1){
+      taskList.innerHTML += `<div style="border:1px solid orange; padding:5px; margin:3px;">
+        Check package ${p.packageNumber} at shelf ${p.shelf} 
+        <input type="text" placeholder="Scan barcode" id="scan-${p.packageNumber}">
+        <button onclick="completeTask('${p.packageNumber}')">Complete</button>
+      </div>`;
+    }
+  });
+
+  // Add move to delivery bay tasks
+  packages.filter(p=>p.status==='Stored').forEach(p=>{
+    if(Math.random()<0.1){
+      taskList.innerHTML += `<div style="border:1px solid green; padding:5px; margin:3px;">
+        Move package ${p.packageNumber} to Delivery Bay 
+        <input type="text" placeholder="Scan barcode" id="scan-${p.packageNumber}">
+        <button onclick="completeTask('${p.packageNumber}','delivery')">Move</button>
+      </div>`;
+    }
+  });
 }
+
+// Complete task
+function completeTask(packageNumber, newStatus){
+  const input = document.getElementById(`scan-${packageNumber}`).value.trim();
+  let packages = JSON.parse(localStorage.getItem('packages')||'[]');
+  let pkg = packages.find(p=>p.packageNumber===packageNumber);
+  if(!pkg){ alert('Package not found'); return; }
+  if(input!==pkg.packageNumber){ alert('Barcode mismatch'); return; }
+  pkg.status = newStatus || 'Checked';
+  localStorage.setItem('packages', JSON.stringify(packages));
+  renderTasks();
+  renderShelves();
 }
+
+// Initial render
+renderShelves();
+renderTasks();
+
+// Update every 5 seconds to simulate tasks appearing
+setInterval(()=>{
+  renderShelves();
+  renderTasks();
+},5000);
