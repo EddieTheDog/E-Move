@@ -2,29 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>E-Move Warehouse</title>
+<title>Warehouse - E-Move</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header>
-<h1>Warehouse - E-Move</h1>
-</header>
+<header><h1>Warehouse Dashboard</h1></header>
+
 <main>
-<h2>Current Tasks</h2>
-<table>
-<thead>
-<tr><th>Package #</th><th>Tracking #</th><th>Customer</th><th>Shelf</th><th>Status</th><th>Priority</th><th>Location</th></tr>
-</thead>
-<tbody id="warehouse-list"></tbody>
-</table>
+<!-- Tabs -->
+<div style="margin-bottom:10px;">
+  <button onclick="showTab('shelves')">Shelf Overview</button>
+  <button onclick="showTab('tasks')">Tasks</button>
+</div>
 
-<h2>Shelf Overview</h2>
-<div id="shelf-grid"></div>
+<!-- Shelf Overview -->
+<div id="shelvesTab">
+  <h2>Shelves</h2>
+  <div id="shelf-grid"></div>
+</div>
 
-<h2>Delivery Bay</h2>
-<div id="delivery-bay"></div>
-
-<button onclick="deleteAllData()">Remove All Packages</button>
+<!-- Tasks -->
+<div id="tasksTab" style="display:none;">
+  <h2>Warehouse Tasks</h2>
+  <div id="task-list"></div>
+</div>
 
 <script src="js/warehouse.js"></script>
 </main>
