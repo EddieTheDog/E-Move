@@ -1,0 +1,15 @@
+[
+  {
+    "packageNumber": "PKG-001",
+    "trackingNumber": "TRK-EM1234",
+    "customerName": "John Doe",
+    "contact": "john@example.com",
+    "recipient": "Jane Doe",
+    "room": "O1",
+    "priority": "normal",
+    "restrictedItems": ["money"],
+    "shelf": "O1",
+    "status": "Stored",
+    "timestamp": "2025-12-06T09:00:00Z"
+  }
+]
