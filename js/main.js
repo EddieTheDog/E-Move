@@ -76,8 +76,15 @@ document.getElementById('intake-form').addEventListener('submit', function(e){
     document.getElementById('tracking-number').innerText = trackingNumber;
     document.getElementById('shelf').innerText = shelf;
 
-    updateScanList();
+    document.getElementById("package-info").style.display = "block";
 
+    // Generate barcode
+    JsBarcode("#barcode", trackingNumber, {format:"CODE128", width:2, height:40});
+    // Generate QR code
+    document.getElementById("qrcode").innerHTML = "";
+    new QRCode(document.getElementById("qrcode"), trackingNumber);
+
+    updateScanList();
     form.reset();
 });
 
