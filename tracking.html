@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E-Move Tracking</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+#tracking-container {
+max-width: 500px;
+margin: auto;
+background: #fff;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+text-align: center;
+}
+#status {
+font-weight: bold;
+font-size: 1.5em;
+margin: 10px 0;
+padding: 10px;
+border-radius: 5px;
+color: white;
+}
+.status-pending { background: orange; }
+.status-stored { background: blue; }
+.status-delivery { background: gold; color: black; }
+.status-delivered { background: green; }
+.status-flagged { background: red; }
+</style>
+</head>
+<body>
+<header>
+<h1>E-Move Tracking</h1>
+</header>
+<main>
+<div id="tracking-container">
+<p>Tracking #: <span id="tracking-number">---</span></p>
+<p>Status: <span id="status" class="status-pending">---</span></p>
+<p>Estimated delivery: <span id="eta">---</span> minutes</p>
+<p id="message"></p>
+</div>
+<script src="js/customer.js"></script>
+</main>
+</body>
+</html>
