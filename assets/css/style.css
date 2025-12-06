@@ -1,10 +1,77 @@
-body { font-family: Arial, sans-serif; margin:20px; }
-header { text-align:center; margin-bottom:20px; }
-h1 { color:#0077cc; }
-button { padding:5px 10px; margin:5px; }
-input, select { margin:5px 0; }
-fieldset { margin:10px 0; padding:10px; }
-table { width:100%; border-collapse:collapse; margin-top:10px;}
-th, td { border:1px solid #ccc; padding:5px; text-align:center; }
-#shelf-grid div { margin:5px 0; }
-#package-info { border-top:1px solid #ccc; padding-top:10px; margin-top:10px;}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9; /* Subtle background color */
+}
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px; /* Added padding */
+    background-color: #ffffff; /* White background for the header */
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+h1 {
+    color: #0056b3; /* Slightly darker primary color */
+    font-size: 2em; /* Ensure good heading size */
+}
+button {
+    padding: 8px 15px; /* Increased padding */
+    margin: 5px;
+    background-color: #0077cc; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for buttons */
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s; /* Smooth transitions for interaction */
+    font-weight: bold;
+}
+button:hover {
+    background-color: #0056b3; /* Darker on hover */
+    transform: translateY(-1px); /* Slight lift effect on hover */
+}
+input, select {
+    margin: 5px 0;
+    padding: 8px; /* Added padding to inputs/selects */
+    border: 1px solid #cce;
+    border-radius: 4px;
+    box-sizing: border-box; /* Crucial for padding/border not to increase width */
+}
+fieldset {
+    margin: 15px 0; /* Increased margin */
+    padding: 15px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* Rounded corners for fieldset */
+    background-color: #ffffff; /* White background */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for the table */
+    background-color: #ffffff;
+}
+th, td {
+    border: 1px solid #eee; /* Lighter border for a cleaner look */
+    padding: 10px; /* Increased padding */
+    text-align: center;
+}
+th {
+    background-color: #eef; /* Light background for headers */
+    color: #333;
+    font-weight: bold;
+}
+#shelf-grid div {
+    margin: 5px 0;
+    padding: 10px; /* Added padding */
+    border: 1px dashed #ccc; /* Subtle border for visual separation */
+    border-radius: 4px;
+}
+#package-info {
+    border-top: 2px solid #0077cc; /* Thicker, colored border-top */
+    padding-top: 15px; /* Increased padding */
+    margin-top: 15px;
+    background-color: #fff;
+    padding: 15px; /* Added general padding */
+    border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+}
