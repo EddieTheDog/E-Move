@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>E-Move - Select Role</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<title>Front Desk - E-Move</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <h1>E-Move</h1>
-    <p>Select your role:</p>
-  </header>
+<header><h1>Front Desk - E-Move</h1></header>
+<main>
+<form id="package-form">
+<fieldset>
+<legend>Customer Info</legend>
+<label>Name: <input type="text" id="customerName" required></label><br>
+<label>Email: <input type="email" id="customerEmail" required></label><br>
+<label>Phone: <input type="text" id="customerPhone" required></label><br>
+<label>Location: 
+<select id="location">
+  <option value="downstairs">Downstairs</option>
+  <option value="upstairs">Upstairs</option>
+</select>
+</label><br>
+<label>Priority: 
+<select id="priority">
+  <option value="normal">Normal</option>
+  <option value="high">High</option>
+</select>
+</label><br>
+<label>Illegal / Restricted items? 
+<select id="flagged">
+  <option value="no">No</option>
+  <option value="yes">Yes</option>
+</select>
+</label>
+</fieldset>
 
-  <main>
-    <button onclick="window.location.href='frontdesk.html'">Front Desk</button>
-    <button onclick="window.location.href='warehouse.html'">Warehouse</button>
-    <button onclick="window.location.href='admin.html'">Admin</button>
-    <button onclick="window.location.href='delivery.html'">Delivery</button>
-  </main>
+<fieldset>
+<legend>Package Info</legend>
+<label>Package # (auto-generated): <span id="package-number">---</span></label><br>
+<label>Tracking #: <span id="tracking-number">---</span></label><br>
+<label>Barcode: <span id="barcode">---</span></label><br>
+<label>QR Code URL: <span id="qrcode">---</span></label><br>
+</fieldset>
+
+<button type="button" onclick="createPackage()">Create Package</button>
+</form>
+
+<script src="js/frontdesk.js"></script>
 </body>
 </html>
