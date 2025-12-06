@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Warehouse - E-Move</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Warehouse</h1>
+    <button onclick="window.location.href='index.html'">Go Back</button>
+  </header>
+  <main>
+    <h2>Stored Packages</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Package #</th>
+          <th>Tracking #</th>
+          <th>Customer</th>
+          <th>Shelf</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody id="warehouse-list"></tbody>
+    </table>
+
+    <h3>Shelf Overview</h3>
+    <div id="shelf-grid"></div>
+  </main>
+  <script src="js/warehouse.js"></script>
+</body>
+</html>
