@@ -11,12 +11,9 @@
 <header><h1>Front Desk - Create Package</h1></header>
 <main>
 <form id="packageForm">
-  <label>Name:</label>
-  <input type="text" id="customerName" required>
-  <label>Email:</label>
-  <input type="text" id="customerEmail">
-  <label>Room:</label>
-  <input type="text" id="room">
+  <label>Name:</label><input type="text" id="customerName" required>
+  <label>Email:</label><input type="text" id="customerEmail">
+  <label>Room:</label><input type="text" id="room">
   <fieldset>
     <legend>Illegal Items</legend>
     <label><input type="checkbox" value="money" id="illegal-money"> Money</label>
@@ -33,11 +30,8 @@
   <button type="button" onclick="deleteAllPackages()">Delete All Packages</button>
 </form>
 
-<h3>Package Barcode:</h3>
-<canvas id="barcode"></canvas>
-
-<h3>Customer QR Code:</h3>
-<canvas id="qrcode"></canvas>
+<h3>Package Barcode:</h3><canvas id="barcode"></canvas>
+<h3>Customer QR Code:</h3><canvas id="qrcode"></canvas>
 
 <script src="js/frontdesk.js"></script>
 </main>
