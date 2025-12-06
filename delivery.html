@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <title>E-Move Delivery</title>
   <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- Barcode JS -->
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <!-- QR Code JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
@@ -16,12 +13,11 @@
   </header>
 
   <main>
-    <h2>Scan Package</h2>
-    <label>Enter Tracking Number:</label>
+    <label>Scan / Enter Tracking Number:</label>
     <input type="text" id="scan-input" placeholder="TRK-EM1234">
     <button id="scan-btn">Scan</button>
 
-    <div id="package-info" style="display:none;">
+    <div id="package-info" style="display:none; margin-top:15px;">
       <p>Package Number: <span id="package-number"></span></p>
       <p>Tracking Number: <span id="tracking-number"></span></p>
       <p>Shelf: <span id="shelf"></span></p>
