@@ -4,34 +4,97 @@
 <meta charset="UTF-8">
 <title>Warehouse - E-Move</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+/* Shelf grid style */
+#shelf-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.shelf-card {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 200px;
+    background-color: #fff;
+}
+.package-card {
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.package-card:hover { transform: translateY(-2px); }
+.package-priority { background-color: #ffcccc; }
+.package-flagged { border: 2px solid red; }
+
+/* Tasks list */
+.task-card {
+    border: 2px solid #0077cc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    background-color: #eef;
+}
+.task-card.priority { border-color: red; background-color: #ffdada; }
+
+/* Fullscreen modal */
+.modal {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center; align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+}
+.modal-content input { width: 100%; margin-top: 10px; padding: 8px; }
+.modal-content button { margin-top: 10px; }
+</style>
 </head>
 <body>
 <header><h1>Warehouse Dashboard</h1></header>
 
 <main>
-<!-- Tabs -->
 <div style="margin-bottom:10px;">
   <button onclick="showTab('shelves')">Shelf Overview</button>
   <button onclick="showTab('tasks')">Tasks</button>
   <button onclick="showTab('delivery')">Delivery Bay</button>
 </div>
 
-<!-- Shelf Overview -->
 <div id="shelvesTab">
   <h2>Shelves</h2>
   <div id="shelf-grid"></div>
 </div>
 
-<!-- Tasks -->
 <div id="tasksTab" style="display:none;">
   <h2>Warehouse Tasks</h2>
   <div id="task-list"></div>
 </div>
 
-<!-- Delivery Bay -->
 <div id="deliveryTab" style="display:none;">
   <h2>Delivery Bay</h2>
   <div id="delivery-list"></div>
+</div>
+
+<!-- Modal for full task interaction -->
+<div id="taskModal" class="modal">
+  <div class="modal-content">
+    <h3 id="modal-title"></h3>
+    <p id="modal-description"></p>
+    <input type="text" id="modal-scan" placeholder="Scan barcode here">
+    <button onclick="completeModalTask()">Confirm</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
 </div>
 
 <script src="js/warehouse.js"></script>
