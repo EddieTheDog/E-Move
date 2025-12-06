@@ -4,41 +4,36 @@
 <meta charset="UTF-8">
 <title>Front Desk - E-Move</title>
 <link rel="stylesheet" href="assets/css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
-<header><h1>Front Desk</h1></header>
+<header><h1>Front Desk - Create Package</h1></header>
 <main>
-<fieldset>
-  <legend>Create Package</legend>
-  <label>Customer Name:</label><input type="text" id="customerName">
-  <label>Email:</label><input type="text" id="email">
-  <label>Phone:</label><input type="text" id="phone">
-  <label>Delivery Location (Room):</label><input type="text" id="location">
-  <label>Upstairs/Downstairs:</label>
-  <select id="floor"><option value="downstairs">Downstairs</option><option value="upstairs">Upstairs</option></select>
+<form id="packageForm">
+  <label>Name:</label>
+  <input type="text" id="customerName" required>
+  <label>Email:</label>
+  <input type="text" id="customerEmail">
+  <label>Room:</label>
+  <input type="text" id="room">
   <label>Priority:</label>
-  <select id="priority"><option value="normal">Normal</option><option value="high">High</option></select>
-  <fieldset>
-    <legend>Restricted Items</legend>
-    <input type="checkbox" id="money"> Money
-    <input type="checkbox" id="animals"> Animals
-    <input type="checkbox" id="other"> Other
-  </fieldset>
-  <button onclick="createPackage()">Create Package</button>
-</fieldset>
+  <select id="priority">
+    <option value="normal">Normal</option>
+    <option value="high">High</option>
+  </select>
+  <label>Flagged (illegal items):</label>
+  <select id="flagged">
+    <option value="false">No</option>
+    <option value="true">Yes</option>
+  </select>
+  <button type="button" onclick="createPackage()">Generate Package</button>
+</form>
 
-<div id="package-info"></div>
-<div id="barcode"></div>
-<div id="qrcode"></div>
+<h3>Package Barcode:</h3>
+<canvas id="barcode"></canvas>
 
-<fieldset>
-  <legend>Confirm Tracking Number</legend>
-  <label>Scan or type tracking number:</label>
-  <input type="text" id="trackingInput">
-  <button onclick="confirmTracking()">Confirm & Store Package</button>
-</fieldset>
+<h3>Customer QR Code:</h3>
+<canvas id="qrcode"></canvas>
 
 <script src="js/frontdesk.js"></script>
 </main>
