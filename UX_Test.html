@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Move UX Test</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>E-Move - UX/Test</h1>
+    <p id="role-display">Role: </p>
+  </header>
+
+  <main>
+    <section id="package-intake">
+      <h2>Package Intake</h2>
+      <form id="intake-form">
+        <label>Customer Name: <input type="text" name="customerName" required></label>
+        <label>Phone/Email: <input type="text" name="contact" required></label>
+        <label>Recipient: <input type="text" name="recipient"></label>
+        <label>Room/Location: <input type="text" name="room"></label>
+        <label>Priority:
+          <select name="priority">
+            <option value="normal">Normal</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <label>Restricted Items:
+          <input type="checkbox" name="money">Money
+          <input type="checkbox" name="animals">Animals
+        </label>
+        <button type="submit">Generate Package</button>
+      </form>
+      <div id="package-info">
+        <p>Package Number: <span id="package-number">---</span></p>
+        <p>Tracking Number: <span id="tracking-number">---</span></p>
+        <p>Assigned Shelf: <span id="shelf">---</span></p>
+      </div>
+    </section>
+
+    <section id="recent-scans">
+      <h2>Recent Packages</h2>
+      <ul id="scan-list"></ul>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
