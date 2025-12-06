@@ -1,10 +1,10 @@
 body { font-family: Arial, sans-serif; margin:20px; }
 header { text-align:center; margin-bottom:20px; }
 h1 { color:#0077cc; }
-form label { display:block; margin:5px 0; }
-button { margin-top:10px; padding:5px 10px; }
-input { margin-right:5px; }
-section { margin-bottom:30px; }
-#package-info { border-top:1px solid #ccc; padding-top:10px; }
-ul { list-style:none; padding-left:0; }
-ul li { margin-bottom:5px; }
+button { padding:5px 10px; margin:5px; }
+input, select { margin:5px 0; }
+fieldset { margin:10px 0; padding:10px; }
+table { width:100%; border-collapse:collapse; margin-top:10px;}
+th, td { border:1px solid #ccc; padding:5px; text-align:center; }
+#shelf-grid div { margin:5px 0; }
+#package-info { border-top:1px solid #ccc; padding-top:10px; margin-top:10px;}
