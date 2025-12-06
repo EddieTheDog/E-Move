@@ -36,6 +36,7 @@ input, select {
     border: 1px solid #cce;
     border-radius: 4px;
     box-sizing: border-box;
+    width: 100%;
 }
 fieldset {
     margin: 15px 0;
