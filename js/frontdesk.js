@@ -1,8 +1,8 @@
-function createPackage() {
+function createPackage(){
   let packages = JSON.parse(localStorage.getItem('packages') || '[]');
 
-  const packageNumber = 'PKG' + (packages.length + 1).toString().padStart(4,'0');
-  const trackingNumber = 'TRK-EM' + (packages.length + 1).toString().padStart(4,'0');
+  const packageNumber = 'PKG'+(packages.length+1).toString().padStart(4,'0');
+  const trackingNumber = 'TRK-EM'+(packages.length+1).toString().padStart(4,'0');
 
   const customerName = document.getElementById('customerName').value;
   const email = document.getElementById('email').value;
@@ -10,9 +10,12 @@ function createPackage() {
   const location = document.getElementById('location').value;
   const floor = document.getElementById('floor').value;
   const priority = document.getElementById('priority').value;
-  const flagged = document.getElementById('money').checked ||
-                  document.getElementById('animals').checked ||
-                  document.getElementById('other').checked;
+  const flagged = document.getElementById('money').checked || document.getElementById('animals').checked || document.getElementById('other').checked;
+
+  if(!customerName || !location){
+    alert("Customer name and location required!");
+    return;
+  }
 
   const pkg = {
     packageNumber,
@@ -32,60 +35,53 @@ function createPackage() {
   packages.push(pkg);
   localStorage.setItem('packages', JSON.stringify(packages));
 
-  // Generate Barcode and QR code
   showCodes(pkg);
 
   document.getElementById('package-info').innerHTML = `
     <p>Package #: ${packageNumber}</p>
     <p>Tracking #: ${trackingNumber}</p>
     <p>QR Code links to: <a href="tracking.html?tracking=${trackingNumber}" target="_blank">tracking page</a></p>
-    ${flagged ? '<strong>Flagged for review!</strong>' : ''}
-    <p>Scan tracking number to confirm before storing.</p>
+    ${flagged?'<strong>Flagged for review!</strong>':''}
+    <p>Scan tracking number to confirm.</p>
   `;
 }
 
-function showCodes(pkg) {
-  // Barcode (package number)
+function showCodes(pkg){
+  // Barcode
   const svg = document.createElement('svg');
   JsBarcode(svg, pkg.packageNumber, {format:"CODE128", displayValue:true, width:2, height:40});
-  const barcodeDiv = document.getElementById('barcode');
-  barcodeDiv.innerHTML=''; barcodeDiv.appendChild(svg);
+  document.getElementById('barcode').innerHTML=''; 
+  document.getElementById('barcode').appendChild(svg);
 
-  // QR Code (tracking page)
+  // QR code
+  const url = `${window.location.origin}/tracking.html?tracking=${pkg.trackingNumber}`;
   const qrDiv = document.getElementById('qrcode');
   qrDiv.innerHTML='';
-  QRCode.toCanvas(qrDiv, `tracking.html?tracking=${pkg.trackingNumber}`, function(err) {
-    if(err) console.error(err);
+  QRCode.toCanvas(qrDiv, url, function(err){
+    if(err) console.error("QR Error:", err);
   });
 }
 
-function confirmTracking() {
+function confirmTracking(){
   const input = document.getElementById('trackingInput').value.trim();
   let packages = JSON.parse(localStorage.getItem('packages') || '[]');
-  let pkg = packages.find(p => p.status === 'Pending Confirmation');
+  let pkg = packages.find(p=>p.status==='Pending Confirmation');
+  if(!pkg){ alert('No package to confirm'); return; }
+  if(input !== pkg.trackingNumber){ alert('Tracking number mismatch!'); return; }
 
-  if(!pkg) { alert('No package to confirm.'); return; }
-  if(input !== pkg.trackingNumber) { alert('Tracking number does not match!'); return; }
-
-  // Assign shelf
+  // Assign shelf automatically
   const shelves = ['O1','O2','O3','O4','O5'];
-  let shelfCounts = shelves.map(s => packages.filter(p => p.shelf===s).length);
-  pkg.shelf = shelves[shelfCounts.indexOf(Math.min(...shelfCounts))];
+  let counts = shelves.map(s=>packages.filter(p=>p.shelf===s).length);
+  pkg.shelf = shelves[counts.indexOf(Math.min(...counts))];
   pkg.status = 'Stored';
-
   localStorage.setItem('packages', JSON.stringify(packages));
-  alert(`Package confirmed! Stored in shelf ${pkg.shelf}.`);
+  alert(`Confirmed! Package stored in ${pkg.shelf}`);
 
-  // Clear display/input
-  document.getElementById('barcode').innerHTML='';
-  document.getElementById('qrcode').innerHTML='';
-  document.getElementById('package-info').innerHTML='';
-  document.getElementById('trackingInput').value='';
-  document.getElementById('customerName').value='';
-  document.getElementById('email').value='';
-  document.getElementById('phone').value='';
-  document.getElementById('location').value='';
-  document.getElementById('money').checked=false;
-  document.getElementById('animals').checked=false;
-  document.getElementById('other').checked=false;
+  // Clear
+  ['barcode','qrcode','package-info','trackingInput','customerName','email','phone','location'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value=''; 
+    if(el) el.innerHTML='';
+  });
+  ['money','animals','other'].forEach(id=>document.getElementById(id).checked=false);
 }
