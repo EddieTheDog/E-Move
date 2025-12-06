@@ -1,22 +1,16 @@
-function renderTracking(){
+function loadTracking(){
   const urlParams=new URLSearchParams(window.location.search);
-  const trackingNum=urlParams.get('number');
+  const number=urlParams.get('number');
+  if(!number) return;
   const packages=JSON.parse(localStorage.getItem('packages')||'[]');
-  const pkg=packages.find(p=>p.trackingNumber===trackingNum);
-  const infoDiv=document.getElementById('trackingInfo');
-  if(!pkg){
-    infoDiv.innerHTML='<p>Package not found.</p>';
-    return;
-  }
-
-  infoDiv.innerHTML=`
-    <p><strong>Package Number:</strong> ${pkg.packageNumber}</p>
-    <p><strong>Status:</strong> ${pkg.status}</p>
-    <p><strong>Room:</strong> ${pkg.room}</p>
-    <p><strong>Priority:</strong> ${pkg.priority}</p>
-    <p><strong>Estimated Delivery:</strong> ${pkg.priority==='high'?'5 min':'15 min'}</p>
-  `;
+  const pkg=packages.find(p=>p.trackingNumber===number);
+  const trackingDiv=document.getElementById('tracking-status');
+  if(!pkg){ trackingDiv.textContent='Package not found'; return;}
+  trackingDiv.innerHTML=`<h3>Package: ${pkg.packageNumber}</h3>
+  <p>Status: ${pkg.status}</p>
+  <p>Expected Delivery: ${pkg.priority==='high'?'Sooner':'Normal'}</p>`;
 }
 
-setInterval(renderTracking,3000);
-renderTracking();
+// auto-refresh
+loadTracking();
+setInterval(loadTracking,2000);
