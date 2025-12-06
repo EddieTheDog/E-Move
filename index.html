@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>E-Move Front Desk</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 </head>
 <body>
 <header>
@@ -40,6 +42,9 @@
 </fieldset>
 
 <div id="package-info"></div>
+<div id="barcode"></div>
+<div id="qrcode"></div>
+<button id="confirm-btn" style="display:none;" onclick="confirmPackage()">Confirm & Next</button>
 
 <script src="js/frontdesk.js"></script>
 </main>
