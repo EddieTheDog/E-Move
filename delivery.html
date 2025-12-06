@@ -2,25 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>E-Move Delivery</title>
+<title>Delivery - E-Move</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header>
-<h1>Delivery Bay</h1>
-</header>
+<header><h1>Delivery - E-Move</h1></header>
 <main>
-<label>Scan package:</label>
-<input type="text" id="scan-input" placeholder="Scan or enter barcode">
-<button onclick="scanPackage()">Scan</button>
-
-<div id="active-package" style="margin-top:20px;"></div>
-
-<div id="delivery-buttons" style="display:none; margin-top:15px;">
-<button onclick="pickedUp()">1. Package Picked Up</button>
-<button onclick="delivered()">2. Package Delivered</button>
-<button onclick="finishDelivery()">3. Confirm & Finish</button>
-</div>
+<h2>Packages Ready for Delivery</h2>
+<div id="deliveryList"></div>
 
 <script src="js/delivery.js"></script>
 </main>
