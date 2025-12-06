@@ -11,6 +11,12 @@ const pkg = packages.find(p => p.trackingNumber === trackingNumberParam);
 if(pkg){
     document.getElementById('status').innerText = pkg.status;
     document.getElementById('location').innerText = pkg.shelf;
+
+    // Generate barcode
+    JsBarcode("#barcode", pkg.trackingNumber, {format:"CODE128", width:2, height:40});
+    // Generate QR code
+    document.getElementById("qrcode").innerHTML = "";
+    new QRCode(document.getElementById("qrcode"), pkg.trackingNumber);
 }else{
     document.getElementById('status').innerText = 'Not found';
     document.getElementById('location').innerText = '---';
