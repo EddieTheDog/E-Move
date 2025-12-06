@@ -2,57 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>E-Move Front Desk</title>
+<title>E-Move Home</title>
 <link rel="stylesheet" href="assets/css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 </head>
 <body>
 <header>
-<h1>Front Desk - E-Move</h1>
+<h1>Welcome to E-Move</h1>
 </header>
 <main>
-<fieldset>
-  <legend>Create Package</legend>
-  <label>Customer Name:</label>
-  <input type="text" id="customerName">
-  <label>Email:</label>
-  <input type="text" id="email">
-  <label>Phone:</label>
-  <input type="text" id="phone">
-  <label>Delivery Location (Room):</label>
-  <input type="text" id="location">
-  <label>Upstairs/Downstairs:</label>
-  <select id="floor">
-    <option value="downstairs">Downstairs</option>
-    <option value="upstairs">Upstairs</option>
-  </select>
-  <label>Priority:</label>
-  <select id="priority">
-    <option value="normal">Normal</option>
-    <option value="high">High</option>
-  </select>
-  <fieldset>
-    <legend>Restricted Items Check</legend>
-    <input type="checkbox" id="money"> Money
-    <input type="checkbox" id="animals"> Animals
-    <input type="checkbox" id="other"> Other
-  </fieldset>
-  <button onclick="createPackage()">Create Package</button>
-</fieldset>
-
-<div id="package-info" style="margin-top:10px;"></div>
-<div id="barcode" style="margin-top:15px;"></div>
-<div id="qrcode" style="margin-top:15px;"></div>
-
-<fieldset style="margin-top:15px;">
-  <legend>Confirm Tracking Number</legend>
-  <label>Scan or type tracking number:</label>
-  <input type="text" id="trackingInput">
-  <button onclick="confirmTracking()">Confirm & Store Package</button>
-</fieldset>
-
-<script src="js/frontdesk.js"></script>
+<button onclick="location.href='frontdesk.html'">Front Desk</button>
+<button onclick="location.href='warehouse.html'">Warehouse</button>
+<button onclick="location.href='delivery.html'">Delivery</button>
 </main>
 </body>
 </html>
