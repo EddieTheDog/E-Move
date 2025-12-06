@@ -2,17 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>E-Move Home</title>
+<title>E-Move - Main Dashboard</title>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<header>
-<h1>Welcome to E-Move</h1>
-</header>
+<header><h1>E-Move Main Dashboard</h1></header>
 <main>
 <button onclick="location.href='frontdesk.html'">Front Desk</button>
 <button onclick="location.href='warehouse.html'">Warehouse</button>
 <button onclick="location.href='delivery.html'">Delivery</button>
+<button onclick="deleteAllPackages()">Delete All Packages</button>
+<script>
+function deleteAllPackages(){
+  if(confirm('Are you sure? This deletes all packages.')){
+    localStorage.removeItem('packages');
+    alert('All packages deleted.');
+  }
+}
+</script>
 </main>
 </body>
 </html>
