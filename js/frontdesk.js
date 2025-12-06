@@ -13,15 +13,34 @@ function createPackage(){
   const trackingNumber=`TRACK-${timestamp}`;
 
   let packages=JSON.parse(localStorage.getItem('packages')||'[]');
-  packages.push({packageNumber,trackingNumber,name,email,room,status:'Pending Confirmation',priority,flagged:illegal,shelf:'O1'});
+  packages.push({
+    packageNumber,
+    trackingNumber,
+    name,
+    email,
+    room,
+    status:'Pending Confirmation',
+    priority,
+    flagged:illegal,
+    shelf:'O1'
+  });
   localStorage.setItem('packages',JSON.stringify(packages));
 
+  // Generate Barcode
   JsBarcode(document.getElementById('barcode'), packageNumber, {format:"CODE128", displayValue:true, width:2, height:50});
-  QRCode.toCanvas(document.getElementById('qrcode'), `tracking.html?number=${trackingNumber}`, function (error) {if(error) console.error(error);});
 
-  alert('Package created! Confirm the barcode.');
+  // Generate QR Code linking to tracking page
+  QRCode.toCanvas(document.getElementById('qrcode'), `tracking.html?number=${trackingNumber}`, function (error) {
+    if(error) console.error(error);
+    alert('Package created! Confirm the barcode before proceeding.');
+  });
 }
 
 function deleteAllPackages(){
-  if(confirm('Are you sure? This will delete all packages.')){localStorage.removeItem('packages');alert('All packages deleted.');}
+  if(confirm('Are you sure? This will delete all packages.')){
+    localStorage.removeItem('packages');
+    alert('All packages deleted.');
+    document.getElementById('barcode').getContext('2d').clearRect(0,0,400,100);
+    document.getElementById('qrcode').getContext('2d').clearRect(0,0,200,200);
+  }
 }
