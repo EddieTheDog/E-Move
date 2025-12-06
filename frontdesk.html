@@ -5,6 +5,7 @@
 <title>Front Desk - E-Move</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
 <header><h1>Front Desk - Create Package</h1></header>
@@ -16,17 +17,20 @@
   <input type="text" id="customerEmail">
   <label>Room:</label>
   <input type="text" id="room">
+  <fieldset>
+    <legend>Illegal Items</legend>
+    <label><input type="checkbox" value="money" id="illegal-money"> Money</label>
+    <label><input type="checkbox" value="animals" id="illegal-animals"> Animals</label>
+    <label><input type="checkbox" value="drugs" id="illegal-drugs"> Drugs</label>
+    <label><input type="checkbox" value="weapons" id="illegal-weapons"> Weapons</label>
+  </fieldset>
   <label>Priority:</label>
   <select id="priority">
     <option value="normal">Normal</option>
     <option value="high">High</option>
   </select>
-  <label>Flagged (illegal items):</label>
-  <select id="flagged">
-    <option value="false">No</option>
-    <option value="true">Yes</option>
-  </select>
   <button type="button" onclick="createPackage()">Generate Package</button>
+  <button type="button" onclick="deleteAllPackages()">Delete All Packages</button>
 </form>
 
 <h3>Package Barcode:</h3>
